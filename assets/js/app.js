@@ -14,16 +14,16 @@ barraBusqueda.addEventListener('input', (event) => {
 });
 
 function mostrarResultadosDestacados(terminoBusqueda) {
-    fetch('https://dummyjson.com/products?limit=9&sortBy=rating&order=desc') // reemplaza esta URL con la de tu API
+    fetch('https://dummyjson.com/products?limit=9&sortBy=rating&order=desc')
         .then(response => response.json())
         .then(data => {
             resultadosBusqueda.innerHTML = ''; // limpia los resultados anteriores
             const rowContainer = document.createElement('div');
-            rowContainer.className = 'row'; // Agrega la clase para la fila
+            rowContainer.className = 'row';
             data.products.forEach(producto => {
                 if (producto.title.toLowerCase().includes(terminoBusqueda)) {
                     const divProducto = document.createElement('div');
-                    divProducto.className = 'col-lg-4 col-md-6 mb-4 produto'; // Agrega las clases CSS necesarias
+                    divProducto.className = 'col-lg-4 col-md-6 mb-4 produto';
                     divProducto.innerHTML = `
                         <div class="card h-100 marginn"> 
                             <img class="card-img-top" src="${producto.thumbnail}" alt="${producto.title}">
@@ -36,24 +36,24 @@ function mostrarResultadosDestacados(terminoBusqueda) {
                             </div>
                         </div>
                     `;
-                    rowContainer.appendChild(divProducto); // Agrega la tarjeta a la fila
+                    rowContainer.appendChild(divProducto);
                 }
             });
-            resultadosBusqueda.appendChild(rowContainer); // Agrega la fila al contenedor de resultados
+            resultadosBusqueda.appendChild(rowContainer);
         });
 }
 
 function mostrarTodosResultados(terminoBusqueda) {
-    fetch('https://dummyjson.com/products') // reemplaza esta URL con la de tu API
+    fetch('https://dummyjson.com/products')
         .then(response => response.json())
         .then(data => {
-            resultadosBusquedaCompleta.innerHTML = ''; // limpia los resultados anteriores
+            resultadosBusquedaCompleta.innerHTML = '';
             const rowContainer = document.createElement('div');
-            rowContainer.className = 'row'; // Agrega la clase para la fila
+            rowContainer.className = 'row';
             data.products.forEach(producto => {
                 if (producto.title.toLowerCase().includes(terminoBusqueda)) {
                     const divProducto = document.createElement('div');
-                    divProducto.className = 'col-lg-4 col-md-6 mb-4 produto'; // Agrega las clases CSS necesarias
+                    divProducto.className = 'col-lg-4 col-md-6 mb-4 produto';
                     divProducto.innerHTML = `
                         <div class="card h-100 marginn"> 
                             <img class="card-img-top" src="${producto.thumbnail}" alt="${producto.title}">
@@ -70,10 +70,10 @@ function mostrarTodosResultados(terminoBusqueda) {
                             </div>
                         </div>
                     `;
-                    rowContainer.appendChild(divProducto); // Agrega la tarjeta a la fila
+                    rowContainer.appendChild(divProducto);
                 }
             });
-            resultadosBusquedaCompleta.appendChild(rowContainer); // Agrega la fila al contenedor de resultados
+            resultadosBusquedaCompleta.appendChild(rowContainer);
         });
 }
 

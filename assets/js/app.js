@@ -14,6 +14,12 @@ barraBusqueda.addEventListener('input', (event) => {
     mostrarTodosResultados(terminoBusqueda);
 });
 
+function getRandomImage() {
+    const apiUrl = 'https://source.unsplash.com/random/400x300';
+    const id = Math.floor(Math.random() * 1000); // Genera un id aleatorio entre 0 y 999
+    const imageUrl = `${apiUrl}?id=${id}`;
+    return imageUrl;
+}
 function mostrarResultadosDestacados(terminoBusqueda) {
     fetch('https://dummyjson.com/products?limit=9&sortBy=rating&order=desc')
         .then(response => response.json())
@@ -100,16 +106,19 @@ function renderOpiniones(data) {
     if (opinionesContainer) { // Check if the element exists
         let rowHtml = '';
         data.forEach((opinion, index) => {
+            const imageUrl = getRandomImage();
             const cardHtml = `
                 <div class="col-md-4">
                     <div class="card">
+                        <img src="${imageUrl}" alt="Imagen aleatoria" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">${opinion.name}</h5>
+                            <p class="card-text">${opinion.email}</p>
                             <p class="card-text">${opinion.body}</p>
                         </div>
                     </div>
                 </div>
-            `;
+                `;
             if (index % 3 === 0) { // Crea un nuevo row cada 3 elementos
                 rowHtml += `<div class="row">${cardHtml}`;
             } else if (index === data.length - 1) { // Cierra el row en el último elemento
@@ -123,3 +132,4 @@ function renderOpiniones(data) {
         console.error('Element #opiniones-clientes not found');
     }
 }
+

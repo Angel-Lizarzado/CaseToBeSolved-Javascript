@@ -6,6 +6,7 @@ const resultadosBusquedaCompleta = document.getElementById('resultados-busqueda-
 window.addEventListener('load', () => {
     mostrarResultadosDestacados('');
     mostrarTodosResultados('');
+    getOpiniones();
 });
 
 barraBusqueda.addEventListener('input', (event) => {
@@ -80,4 +81,45 @@ function mostrarTodosResultados(terminoBusqueda) {
 
 
 
+function getOpiniones() {
+    const apiUrl = 'https://jsonplaceholder.typicode.com/comments';
 
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const opinionesLimitadas = data.slice(0, 9); // Limita el número de comentarios a 10
+            renderOpiniones(opinionesLimitadas);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            // You could also display an error message to the user here
+        });
+}
+function renderOpiniones(data) {
+    const opinionesContainer = document.getElementById('opiniones-clientes');
+    if (opinionesContainer) { // Check if the element exists
+        let rowHtml = '';
+        data.forEach((opinion, index) => {
+            const cardHtml = `
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${opinion.name}</h5>
+                            <p class="card-text">${opinion.body}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            if (index % 3 === 0) { // Crea un nuevo row cada 3 elementos
+                rowHtml += `<div class="row">${cardHtml}`;
+            } else if (index === data.length - 1) { // Cierra el row en el último elemento
+                rowHtml += cardHtml + `</div>`;
+            } else {
+                rowHtml += cardHtml;
+            }
+        });
+        opinionesContainer.innerHTML = rowHtml;
+    } else {
+        console.error('Element #opiniones-clientes not found');
+    }
+}

@@ -1,14 +1,39 @@
 body {
-    background: linear-gradient(326deg, #1a1a1a 0%, rgb(228, 145, 112) 18%, #1a1a1a 68%);
+    background-color: #2F2B32;
 }
 
+.navbar {
+    background-color: #2F2B32;
+    /* Midnight Mystery */
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
 
+.navbar-nav {
+    margin-left: auto;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
+    color: #FFFFFF;
+    font-size: 18px;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #CCCCCC;
+}
 
 .boton {
     width: 100%;
     height: 48px;
-    background-color: white;
-    border: 2px solid orangered;
+    background-color: #FAF8ED;
+    /* Buttercream Bliss */
+    border: 2px solid #F95A37;
+    /* Terra Cotta Temptation */
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -17,23 +42,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 a {
-    color: white;
+    color: #A7BF2E;
+    /* Enchanted Emerald */
 }
 
 .margin {
     margin-left: 40px;
     transition: transform 250ms;
-
 }
 
 .marginn {
-
     transition: transform 250ms;
-
 }
 
 .contacto {
@@ -41,47 +63,53 @@ a {
 }
 
 .marginn:hover {
-    border: 2px solid orangered;
+    border: 2px solid #F95A37;
+    /* Terra Cotta Temptation */
     transform: scale(1.05);
-
 }
 
 .margin:hover {
-    background-color: orangered;
+    background-color: #F95A37;
+    /* Terra Cotta Temptation */
     transform: scale(1.13);
 }
 
 .font {
-    color: orangered;
+    color: #F95A37;
+    /* Terra Cotta Temptation */
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 40px;
     margin-top: 40px;
-
 }
 
 .fontContact {
-    color: black;
+    color: #F95A37;
+    /* Midnight Mystery */
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 40px;
     margin-top: 40px;
-
 }
 
 .fontt {
-    color: orangered;
+    color: #F95A37;
+    /* Terra Cotta Temptation */
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
-
 }
 
 a {
-    color: white;
+    color: #A7BF2E;
+    /* Enchanted Emerald */
     margin-left: 10px;
+}
 
+.carousel {
+    border-radius: 20px;
 }
 
 .carousel-item {
     transition: opacity 0.4s ease-in-out;
+    border-radius: 20px;
 }
 
 .carousel-item.active {
@@ -89,23 +117,26 @@ a {
 }
 
 .header {
-    border: 1px solid orangered;
-
+    border: 1px solid #F95A37;
+    /* Terra Cotta Temptation */
 }
 
 .carousel-item-next,
 .carousel-item-prev,
 .carousel-item.active.carousel-item-left,
 .carousel-item.active.carousel-item-right {
+    background-size: cover;
     opacity: 0.5;
 }
 
 #searchInput {
-    border: 2px solid orangered;
+    border: 2px solid #F95A37;
+    /* Terra Cotta Temptation */
 }
 
 #barra-busqueda {
-    border: 2px solid orangered;
+    border: 2px solid #F95A37;
+    /* Terra Cotta Temptation */
     padding: 1em;
     margin-top: 1em;
     margin-bottom: 1em;
@@ -119,7 +150,8 @@ a {
 
 .icon {
     font-size: 30px;
-    color: white;
+    color: #A7BF2E;
+    /* Enchanted Emerald */
 }
 
 .card-footer {
@@ -130,4 +162,111 @@ a {
     align-items: center;
     align-content: center;
     margin: auto;
+}
+
+.card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #FAF8ED;
+    /* Buttercream Bliss */
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2F2B32;
+    /* Midnight Mystery */
+}
+
+.card-text {
+    font-size: 18px;
+    color: #666;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.product-card {
+    background-color: #FAF8ED;
+    /* Buttercream Bliss */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2F2B32;
+    /* Midnight Mystery */
+}
+
+.product-price {
+    font-size: 18px;
+    color: #666;
+}
+
+.opinion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.opinion-card {
+    background-color: #FAF8ED;
+    /* Buttercream Bliss */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.opinion-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.opinion-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.opinion-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2F2B32;
+    /* Midnight Mystery */
+}
+
+.opinion-text {
+    font-size: 16px;
+    color: #666;
 }

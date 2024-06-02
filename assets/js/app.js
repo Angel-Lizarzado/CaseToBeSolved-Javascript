@@ -14,12 +14,7 @@ barraBusqueda.addEventListener('input', (event) => {
     mostrarTodosResultados(terminoBusqueda);
 });
 
-function getRandomImage() {
-    const apiUrl = 'https://source.unsplash.com/random/400x300';
-    const id = Math.floor(Math.random() * 1000); // Genera un id aleatorio entre 0 y 999
-    const imageUrl = `${apiUrl}?id=${id}`;
-    return imageUrl;
-}
+
 function mostrarResultadosDestacados(terminoBusqueda) {
     fetch('https://dummyjson.com/products?limit=9&sortBy=rating&order=desc')
         .then(response => response.json())
@@ -62,28 +57,62 @@ function mostrarTodosResultados(terminoBusqueda) {
                     const divProducto = document.createElement('div');
                     divProducto.className = 'col-lg-4 col-md-6 mb-4 produto';
                     divProducto.innerHTML = `
-                        <div class="card h-100 marginn"> 
-                            <img class="card-img-top" src="${producto.thumbnail}" alt="${producto.title}">
-                            <div class="card-body">
-                                <h4 class="card-title">${producto.title}</h4>
-                                
-                                <h6>Rating: ${producto.rating}</h5>
-                                <p class="card-text">${producto.description}</p>
-                                <div class="card-footer">
-                                <h5>$${producto.price}</h5>
-                                    <a class="btn btn-primary">Comprar</a>
-                                    </div>
-                                <!-- Agrega más detalles según tus necesidades -->
-                            </div>
-                        </div>
-                    `;
+              <div class="card h-100 marginn"> 
+                <img class="card-img-top" src="${producto.thumbnail}" alt="${producto.title}">
+                <div class="card-body">
+                  <h4 class="card-title">${producto.title}</h4>
+                  <h5>$${producto.price}</h5>
+                  <h6>Rating: ${producto.rating}</h5>
+                  <p class="card-text">${producto.description}</p>
+                  <button class="btn btn-primary" data-id="${producto.id}">Comprar</button>
+                </div>
+              </div>
+            `;
                     rowContainer.appendChild(divProducto);
                 }
             });
             resultadosBusquedaCompleta.appendChild(rowContainer);
+
+            // Agregar evento de clic a los botones "Comprar"
+            const comprarButtons = document.querySelectorAll('.btn.btn-primary');
+            comprarButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productId = event.target.dataset.id;
+                    fetch(`https://dummyjson.com/products/${productId}`)
+                        .then(response => response.json())
+                        .then(productData => {
+                            // Mostrar información adicional del producto en el modal
+                            const modal = document.getElementById('product-modal');
+                            modal.innerHTML = `
+                  <h2>${productData.title}</h2>
+                  <p>${productData.description}</p>
+                  <p>Precio: $${productData.price}</p>
+                  <p>Rating: ${productData.rating}</p>
+                  <h3>Comentarios de clientes:</h3>
+                  <ul id="comentarios-clientes"></ul>
+                `;
+                            // Obtener comentarios de clientes desde JSONPlaceholder
+                            fetch('https://jsonplaceholder.typicode.com/posts')
+                                .then(response => response.json())
+                                .then(comments => {
+                                    const comentariosContainer = document.getElementById('comentarios-clientes');
+                                    comments.forEach(comment => {
+                                        const comentarioHTML = `
+                        <li>
+                          <p>${comment.title}</p>
+                          <p>${comment.body}</p>
+                        </li>
+                      `;
+                                        comentariosContainer.innerHTML += comentarioHTML;
+                                    });
+                                });
+                            // Mostrar el modal
+                            modal.style.display = 'block';
+                        });
+                });
+            });
         });
 }
-
 
 
 
@@ -104,32 +133,24 @@ function getOpiniones() {
 function renderOpiniones(data) {
     const opinionesContainer = document.getElementById('opiniones-clientes');
     if (opinionesContainer) { // Check if the element exists
-        let rowHtml = '';
-        data.forEach((opinion, index) => {
-            const imageUrl = getRandomImage();
+        let opinionesHtml = '';
+        data.forEach((opinion) => {
             const cardHtml = `
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="${imageUrl}" alt="Imagen aleatoria" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">${opinion.name}</h5>
-                            <p class="card-text">${opinion.email}</p>
-                            <p class="card-text">${opinion.body}</p>
-                        </div>
-                    </div>
-                </div>
-                `;
-            if (index % 3 === 0) { // Crea un nuevo row cada 3 elementos
-                rowHtml += `<div class="row">${cardHtml}`;
-            } else if (index === data.length - 1) { // Cierra el row en el último elemento
-                rowHtml += cardHtml + `</div>`;
-            } else {
-                rowHtml += cardHtml;
-            }
+          <div class="opinion-card">
+            <div class="opinion-image">
+            </div>
+            <div class="opinion-info">
+              <h5 class="opinion-name">${opinion.name}</h5>
+              <p class="opinion-rating">${opinion.email}</p>
+              <p class="opinion-text">${opinion.body}</p>
+              
+            </div>
+          </div>
+        `;
+            opinionesHtml += cardHtml;
         });
-        opinionesContainer.innerHTML = rowHtml;
+        opinionesContainer.innerHTML = opinionesHtml;
     } else {
         console.error('Element #opiniones-clientes not found');
     }
 }
-
